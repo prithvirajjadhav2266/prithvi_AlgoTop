@@ -1,0 +1,901 @@
+#pragma version 10
+#pragma typetrack false
+
+// smart_contracts.ticketing.contract.TicketingPlatform.__algopy_entrypoint_with_init() -> uint64:
+main:
+    intcblock 1 0
+    bytecblock 0x151f7c75 "event_counter" 0x63 0x6561 0x6563 0x6570 0x6574 0x6573 0x656e 0x6576 0x6564
+    txn ApplicationID
+    bnz main_after_if_else@2
+    // smart_contracts/ticketing/contract.py:40-41
+    // # Counter for generating unique event IDs
+    // self.event_counter = UInt64(0)
+    bytec_1 // "event_counter"
+    intc_1 // 0
+    app_global_put
+
+main_after_if_else@2:
+    // smart_contracts/ticketing/contract.py:22
+    // class TicketingPlatform(ARC4Contract):
+    txn NumAppArgs
+    bz main_bare_routing@13
+    pushbytess 0xbc57a977 0xc0ff4050 0x8e2aa83e 0x8d17221c 0x87a60cf2 0x22dc07e5 0xde9121ff 0xbc802093 // method "register_club(string,string)string", method "create_event(string,string,uint64,uint64,uint64)uint64", method "buy_ticket(uint64,pay)uint64", method "verify_ticket(uint64,account)bool", method "get_event_details(uint64)(byte[],byte[],byte[],uint64,uint64,uint64,uint64,uint64)", method "get_club_name(byte[])byte[]", method "get_total_events()uint64", method "is_club_registered(account)bool"
+    txna ApplicationArgs 0
+    match main_register_club_route@5 main_create_event_route@6 main_buy_ticket_route@7 main_verify_ticket_route@8 main_get_event_details_route@9 main_get_club_name_route@10 main_get_total_events_route@11 main_is_club_registered_route@12
+
+main_after_if_else@15:
+    // smart_contracts/ticketing/contract.py:22
+    // class TicketingPlatform(ARC4Contract):
+    intc_1 // 0
+    return
+
+main_is_club_registered_route@12:
+    // smart_contracts/ticketing/contract.py:259
+    // @abimethod(readonly=True)
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/ticketing/contract.py:22
+    // class TicketingPlatform(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txnas Accounts
+    // smart_contracts/ticketing/contract.py:259
+    // @abimethod(readonly=True)
+    callsub is_club_registered
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_get_total_events_route@11:
+    // smart_contracts/ticketing/contract.py:249
+    // @abimethod(readonly=True)
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub get_total_events
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_get_club_name_route@10:
+    // smart_contracts/ticketing/contract.py:232
+    // @abimethod(readonly=True)
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/ticketing/contract.py:22
+    // class TicketingPlatform(ARC4Contract):
+    txna ApplicationArgs 1
+    extract 2 0
+    // smart_contracts/ticketing/contract.py:232
+    // @abimethod(readonly=True)
+    callsub get_club_name
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_get_event_details_route@9:
+    // smart_contracts/ticketing/contract.py:205
+    // @abimethod(readonly=True)
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/ticketing/contract.py:22
+    // class TicketingPlatform(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    // smart_contracts/ticketing/contract.py:205
+    // @abimethod(readonly=True)
+    callsub get_event_details
+    dig 7
+    len
+    itob
+    extract 6 2
+    uncover 8
+    concat
+    dig 7
+    len
+    itob
+    extract 6 2
+    uncover 8
+    concat
+    dig 7
+    len
+    itob
+    extract 6 2
+    uncover 8
+    concat
+    uncover 7
+    itob
+    uncover 7
+    itob
+    uncover 7
+    itob
+    uncover 7
+    itob
+    uncover 7
+    itob
+    dig 7
+    len
+    pushint 46 // 46
+    +
+    dup
+    itob
+    extract 6 2
+    pushbytes 0x002e
+    swap
+    concat
+    dig 8
+    len
+    uncover 2
+    +
+    itob
+    extract 6 2
+    concat
+    uncover 5
+    concat
+    uncover 4
+    concat
+    uncover 3
+    concat
+    uncover 2
+    concat
+    swap
+    concat
+    uncover 3
+    concat
+    uncover 2
+    concat
+    swap
+    concat
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_verify_ticket_route@8:
+    // smart_contracts/ticketing/contract.py:179
+    // @abimethod(readonly=True)
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/ticketing/contract.py:22
+    // class TicketingPlatform(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txna ApplicationArgs 2
+    btoi
+    txnas Accounts
+    // smart_contracts/ticketing/contract.py:179
+    // @abimethod(readonly=True)
+    callsub verify_ticket
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_buy_ticket_route@7:
+    // smart_contracts/ticketing/contract.py:129
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/ticketing/contract.py:22
+    // class TicketingPlatform(ARC4Contract):
+    txna ApplicationArgs 1
+    btoi
+    txn GroupIndex
+    intc_0 // 1
+    -
+    dup
+    gtxns TypeEnum
+    intc_0 // pay
+    ==
+    assert // transaction type is pay
+    // smart_contracts/ticketing/contract.py:129
+    // @abimethod()
+    callsub buy_ticket
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_create_event_route@6:
+    // smart_contracts/ticketing/contract.py:64
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/ticketing/contract.py:22
+    // class TicketingPlatform(ARC4Contract):
+    txna ApplicationArgs 1
+    extract 2 0
+    txna ApplicationArgs 2
+    extract 2 0
+    txna ApplicationArgs 3
+    btoi
+    txna ApplicationArgs 4
+    btoi
+    txna ApplicationArgs 5
+    btoi
+    // smart_contracts/ticketing/contract.py:64
+    // @abimethod()
+    callsub create_event
+    itob
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_register_club_route@5:
+    // smart_contracts/ticketing/contract.py:43
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/ticketing/contract.py:22
+    // class TicketingPlatform(ARC4Contract):
+    txna ApplicationArgs 1
+    extract 2 0
+    txna ApplicationArgs 2
+    extract 2 0
+    // smart_contracts/ticketing/contract.py:43
+    // @abimethod()
+    callsub register_club
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_bare_routing@13:
+    // smart_contracts/ticketing/contract.py:22
+    // class TicketingPlatform(ARC4Contract):
+    txn OnCompletion
+    bnz main_after_if_else@15
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    intc_0 // 1
+    return
+
+
+// smart_contracts.ticketing.contract.TicketingPlatform.register_club(club_name: bytes, contact: bytes) -> bytes:
+register_club:
+    // smart_contracts/ticketing/contract.py:43-44
+    // @abimethod()
+    // def register_club(self, club_name: String, contact: String) -> String:
+    proto 2 1
+    // smart_contracts/ticketing/contract.py:55-56
+    // # Check if club already registered
+    // existing_name, exists = self.club_names.maybe(Txn.sender)
+    bytec_2 // 0x63
+    txn Sender
+    concat
+    box_get
+    bury 1
+    // smart_contracts/ticketing/contract.py:57
+    // assert not exists, "Club already registered"
+    !
+    assert // Club already registered
+    // smart_contracts/ticketing/contract.py:59-60
+    // # Store club name (contact info can be stored off-chain or in a separate box if needed)
+    // self.club_names[Txn.sender] = club_name.bytes
+    bytec_2 // 0x63
+    txn Sender
+    concat
+    dup
+    box_del
+    pop
+    frame_dig -2
+    box_put
+    // smart_contracts/ticketing/contract.py:62
+    // return String("Club registered successfully")
+    pushbytes "Club registered successfully"
+    retsub
+
+
+// smart_contracts.ticketing.contract.TicketingPlatform.create_event(event_name: bytes, venue: bytes, event_date: uint64, ticket_price: uint64, ticket_count: uint64) -> uint64:
+create_event:
+    // smart_contracts/ticketing/contract.py:64-72
+    // @abimethod()
+    // def create_event(
+    //     self,
+    //     event_name: String,
+    //     venue: String,
+    //     event_date: UInt64,
+    //     ticket_price: UInt64,
+    //     ticket_count: UInt64,
+    // ) -> UInt64:
+    proto 5 1
+    // smart_contracts/ticketing/contract.py:86-87
+    // # Verify caller is a registered club
+    // club_name_val, club_exists = self.club_names.maybe(Txn.sender)
+    bytec_2 // 0x63
+    txn Sender
+    concat
+    box_get
+    bury 1
+    // smart_contracts/ticketing/contract.py:88
+    // assert club_exists, "Only registered clubs can create events"
+    assert // Only registered clubs can create events
+    // smart_contracts/ticketing/contract.py:90-91
+    // # Validate inputs
+    // assert event_date > Global.latest_timestamp, "Event must be in future"
+    frame_dig -3
+    global LatestTimestamp
+    >
+    assert // Event must be in future
+    // smart_contracts/ticketing/contract.py:92
+    // assert ticket_price > 0, "Ticket price must be greater than 0"
+    frame_dig -2
+    assert // Ticket price must be greater than 0
+    // smart_contracts/ticketing/contract.py:93
+    // assert ticket_count > 0, "Must have at least 1 ticket"
+    frame_dig -1
+    assert // Must have at least 1 ticket
+    // smart_contracts/ticketing/contract.py:94
+    // assert ticket_count <= 10000, "Cannot create more than 10000 tickets"
+    frame_dig -1
+    pushint 10000 // 10000
+    <=
+    assert // Cannot create more than 10000 tickets
+    // smart_contracts/ticketing/contract.py:96-97
+    // # Generate unique event ID
+    // self.event_counter += UInt64(1)
+    intc_1 // 0
+    bytec_1 // "event_counter"
+    app_global_get_ex
+    assert // check self.event_counter exists
+    intc_0 // 1
+    +
+    bytec_1 // "event_counter"
+    swap
+    app_global_put
+    // smart_contracts/ticketing/contract.py:98
+    // event_id = self.event_counter
+    intc_1 // 0
+    bytec_1 // "event_counter"
+    app_global_get_ex
+    assert // check self.event_counter exists
+    // smart_contracts/ticketing/contract.py:100-113
+    // # Create ticket ASA (Algorand Standard Asset)
+    // ticket_asa = itxn.AssetConfig(
+    //     total=ticket_count,
+    //     decimals=0,  # Tickets are non-divisible
+    //     default_frozen=False,
+    //     unit_name=String("TKT"),
+    //     asset_name=event_name,
+    //     url=String("https://campus-tix.algo"),
+    //     manager=Global.current_application_address,
+    //     reserve=Global.current_application_address,
+    //     freeze=Global.current_application_address,
+    //     clawback=Global.current_application_address,
+    //     fee=UInt64(15000),  # Increased fee for inner ASA creation transaction
+    // ).submit()
+    itxn_begin
+    // smart_contracts/ticketing/contract.py:108
+    // manager=Global.current_application_address,
+    global CurrentApplicationAddress
+    // smart_contracts/ticketing/contract.py:109-111
+    // reserve=Global.current_application_address,
+    // freeze=Global.current_application_address,
+    // clawback=Global.current_application_address,
+    dupn 3
+    itxn_field ConfigAssetClawback
+    itxn_field ConfigAssetFreeze
+    itxn_field ConfigAssetReserve
+    itxn_field ConfigAssetManager
+    // smart_contracts/ticketing/contract.py:107
+    // url=String("https://campus-tix.algo"),
+    pushbytes "https://campus-tix.algo"
+    itxn_field ConfigAssetURL
+    frame_dig -5
+    itxn_field ConfigAssetName
+    // smart_contracts/ticketing/contract.py:105
+    // unit_name=String("TKT"),
+    pushbytes "TKT"
+    itxn_field ConfigAssetUnitName
+    // smart_contracts/ticketing/contract.py:104
+    // default_frozen=False,
+    intc_1 // 0
+    itxn_field ConfigAssetDefaultFrozen
+    // smart_contracts/ticketing/contract.py:103
+    // decimals=0,  # Tickets are non-divisible
+    intc_1 // 0
+    itxn_field ConfigAssetDecimals
+    frame_dig -1
+    itxn_field ConfigAssetTotal
+    // smart_contracts/ticketing/contract.py:100-101
+    // # Create ticket ASA (Algorand Standard Asset)
+    // ticket_asa = itxn.AssetConfig(
+    pushint 3 // acfg
+    itxn_field TypeEnum
+    // smart_contracts/ticketing/contract.py:112
+    // fee=UInt64(15000),  # Increased fee for inner ASA creation transaction
+    pushint 15000 // 15000
+    itxn_field Fee
+    // smart_contracts/ticketing/contract.py:100-113
+    // # Create ticket ASA (Algorand Standard Asset)
+    // ticket_asa = itxn.AssetConfig(
+    //     total=ticket_count,
+    //     decimals=0,  # Tickets are non-divisible
+    //     default_frozen=False,
+    //     unit_name=String("TKT"),
+    //     asset_name=event_name,
+    //     url=String("https://campus-tix.algo"),
+    //     manager=Global.current_application_address,
+    //     reserve=Global.current_application_address,
+    //     freeze=Global.current_application_address,
+    //     clawback=Global.current_application_address,
+    //     fee=UInt64(15000),  # Increased fee for inner ASA creation transaction
+    // ).submit()
+    itxn_submit
+    itxn CreatedAssetID
+    // smart_contracts/ticketing/contract.py:117-118
+    // # Store event information in separate boxes
+    // self.event_clubs[event_id] = Txn.sender
+    dig 1
+    itob
+    bytec 4 // 0x6563
+    dig 1
+    concat
+    txn Sender
+    box_put
+    // smart_contracts/ticketing/contract.py:119
+    // self.event_names[event_id] = event_name.bytes
+    bytec 8 // 0x656e
+    dig 1
+    concat
+    dup
+    box_del
+    pop
+    frame_dig -5
+    box_put
+    // smart_contracts/ticketing/contract.py:120
+    // self.event_venues[event_id] = venue.bytes
+    bytec 9 // 0x6576
+    dig 1
+    concat
+    dup
+    box_del
+    pop
+    frame_dig -4
+    box_put
+    // smart_contracts/ticketing/contract.py:121
+    // self.event_dates[event_id] = event_date
+    bytec 10 // 0x6564
+    dig 1
+    concat
+    frame_dig -3
+    itob
+    box_put
+    // smart_contracts/ticketing/contract.py:122
+    // self.event_prices[event_id] = ticket_price
+    bytec 5 // 0x6570
+    dig 1
+    concat
+    frame_dig -2
+    itob
+    box_put
+    // smart_contracts/ticketing/contract.py:123
+    // self.event_total[event_id] = ticket_count
+    bytec 6 // 0x6574
+    dig 1
+    concat
+    frame_dig -1
+    itob
+    box_put
+    // smart_contracts/ticketing/contract.py:124
+    // self.event_sold[event_id] = UInt64(0)
+    bytec 7 // 0x6573
+    dig 1
+    concat
+    intc_1 // 0
+    itob
+    box_put
+    // smart_contracts/ticketing/contract.py:125
+    // self.event_assets[event_id] = ticket_asset_id
+    bytec_3 // 0x6561
+    swap
+    concat
+    swap
+    itob
+    box_put
+    // smart_contracts/ticketing/contract.py:127
+    // return event_id
+    retsub
+
+
+// smart_contracts.ticketing.contract.TicketingPlatform.buy_ticket(event_id: uint64, payment: uint64) -> uint64:
+buy_ticket:
+    // smart_contracts/ticketing/contract.py:129-134
+    // @abimethod()
+    // def buy_ticket(
+    //     self,
+    //     event_id: UInt64,
+    //     payment: gtxn.PaymentTransaction,
+    // ) -> UInt64:
+    proto 2 1
+    // smart_contracts/ticketing/contract.py:146-147
+    // # Verify event exists
+    // club_owner, exists = self.event_clubs.maybe(event_id)
+    frame_dig -2
+    itob
+    bytec 4 // 0x6563
+    dig 1
+    concat
+    box_get
+    // smart_contracts/ticketing/contract.py:148
+    // assert exists, "Event not found"
+    assert // Event not found
+    // smart_contracts/ticketing/contract.py:150-151
+    // # Get event details
+    // ticket_price, price_exists = self.event_prices.maybe(event_id)
+    bytec 5 // 0x6570
+    dig 2
+    concat
+    box_get
+    pop
+    btoi
+    // smart_contracts/ticketing/contract.py:152
+    // total_tickets, total_exists = self.event_total.maybe(event_id)
+    bytec 6 // 0x6574
+    dig 3
+    concat
+    box_get
+    pop
+    btoi
+    // smart_contracts/ticketing/contract.py:153
+    // sold_tickets, sold_exists = self.event_sold.maybe(event_id)
+    bytec 7 // 0x6573
+    dig 4
+    concat
+    dup
+    box_get
+    pop
+    btoi
+    // smart_contracts/ticketing/contract.py:154
+    // ticket_asset_id, asset_exists = self.event_assets.maybe(event_id)
+    bytec_3 // 0x6561
+    uncover 6
+    concat
+    box_get
+    pop
+    btoi
+    // smart_contracts/ticketing/contract.py:156-157
+    // # Check tickets available
+    // assert sold_tickets < total_tickets, "Event sold out"
+    dig 1
+    uncover 4
+    <
+    assert // Event sold out
+    // smart_contracts/ticketing/contract.py:159-160
+    // # Verify payment transaction
+    // assert payment.receiver == club_owner, "Payment must go to club"
+    frame_dig -1
+    gtxns Receiver
+    uncover 5
+    ==
+    assert // Payment must go to club
+    // smart_contracts/ticketing/contract.py:161
+    // assert payment.amount == ticket_price, "Incorrect payment amount"
+    frame_dig -1
+    gtxns Amount
+    uncover 4
+    ==
+    assert // Incorrect payment amount
+    // smart_contracts/ticketing/contract.py:162
+    // assert payment.sender == Txn.sender, "Payment sender mismatch"
+    frame_dig -1
+    gtxns Sender
+    txn Sender
+    ==
+    assert // Payment sender mismatch
+    // smart_contracts/ticketing/contract.py:164-172
+    // # Transfer ticket ASA to buyer
+    // # Note: Buyer must have opted-in to the ASA first
+    // itxn.AssetTransfer(
+    //     xfer_asset=ticket_asset_id,
+    //     asset_receiver=Txn.sender,
+    //     asset_amount=1,
+    //     sender=Global.current_application_address,
+    //     fee=UInt64(2000),
+    // ).submit()
+    itxn_begin
+    // smart_contracts/ticketing/contract.py:168
+    // asset_receiver=Txn.sender,
+    txn Sender
+    // smart_contracts/ticketing/contract.py:170
+    // sender=Global.current_application_address,
+    global CurrentApplicationAddress
+    itxn_field Sender
+    // smart_contracts/ticketing/contract.py:169
+    // asset_amount=1,
+    intc_0 // 1
+    itxn_field AssetAmount
+    itxn_field AssetReceiver
+    dup
+    itxn_field XferAsset
+    // smart_contracts/ticketing/contract.py:164-166
+    // # Transfer ticket ASA to buyer
+    // # Note: Buyer must have opted-in to the ASA first
+    // itxn.AssetTransfer(
+    pushint 4 // axfer
+    itxn_field TypeEnum
+    // smart_contracts/ticketing/contract.py:171
+    // fee=UInt64(2000),
+    pushint 2000 // 2000
+    itxn_field Fee
+    // smart_contracts/ticketing/contract.py:164-172
+    // # Transfer ticket ASA to buyer
+    // # Note: Buyer must have opted-in to the ASA first
+    // itxn.AssetTransfer(
+    //     xfer_asset=ticket_asset_id,
+    //     asset_receiver=Txn.sender,
+    //     asset_amount=1,
+    //     sender=Global.current_application_address,
+    //     fee=UInt64(2000),
+    // ).submit()
+    itxn_submit
+    // smart_contracts/ticketing/contract.py:174-175
+    // # Update sold tickets counter
+    // self.event_sold[event_id] = sold_tickets + UInt64(1)
+    swap
+    intc_0 // 1
+    +
+    itob
+    uncover 2
+    swap
+    box_put
+    // smart_contracts/ticketing/contract.py:177
+    // return ticket_asset_id
+    retsub
+
+
+// smart_contracts.ticketing.contract.TicketingPlatform.verify_ticket(event_id: uint64, attendee: bytes) -> bytes:
+verify_ticket:
+    // smart_contracts/ticketing/contract.py:179-184
+    // @abimethod(readonly=True)
+    // def verify_ticket(
+    //     self,
+    //     event_id: UInt64,
+    //     attendee: Account,
+    // ) -> Bool:
+    proto 2 1
+    // smart_contracts/ticketing/contract.py:195-196
+    // # Get event ticket asset ID
+    // ticket_asset_id, exists = self.event_assets.maybe(event_id)
+    frame_dig -2
+    itob
+    bytec_3 // 0x6561
+    swap
+    concat
+    box_get
+    swap
+    btoi
+    // smart_contracts/ticketing/contract.py:197
+    // assert exists, "Event not found"
+    swap
+    assert // Event not found
+    // smart_contracts/ticketing/contract.py:199-200
+    // # Check if attendee has balance of ticket ASA
+    // asset_balance, balance_exists = op.AssetHoldingGet.asset_balance(attendee, ticket_asset_id)
+    frame_dig -1
+    swap
+    asset_holding_get AssetBalance
+    // smart_contracts/ticketing/contract.py:202-203
+    // # Return True if the account has opted in and has at least 1 ticket
+    // return Bool(balance_exists and asset_balance > 0)
+    bz verify_ticket_bool_false@3
+    frame_dig 0
+    bz verify_ticket_bool_false@3
+    intc_0 // 1
+
+verify_ticket_bool_merge@4:
+    // smart_contracts/ticketing/contract.py:202-203
+    // # Return True if the account has opted in and has at least 1 ticket
+    // return Bool(balance_exists and asset_balance > 0)
+    pushbytes 0x00
+    intc_1 // 0
+    uncover 2
+    setbit
+    swap
+    retsub
+
+verify_ticket_bool_false@3:
+    intc_1 // 0
+    b verify_ticket_bool_merge@4
+
+
+// smart_contracts.ticketing.contract.TicketingPlatform.get_event_details(event_id: uint64) -> bytes, bytes, bytes, uint64, uint64, uint64, uint64, uint64:
+get_event_details:
+    // smart_contracts/ticketing/contract.py:205-209
+    // @abimethod(readonly=True)
+    // def get_event_details(
+    //     self,
+    //     event_id: UInt64,
+    // ) -> tuple[Bytes, Bytes, Bytes, UInt64, UInt64, UInt64, UInt64, UInt64]:
+    proto 1 8
+    // smart_contracts/ticketing/contract.py:219
+    // club_owner, exists = self.event_clubs.maybe(event_id)
+    frame_dig -1
+    itob
+    bytec 4 // 0x6563
+    dig 1
+    concat
+    box_get
+    // smart_contracts/ticketing/contract.py:220
+    // assert exists, "Event not found"
+    assert // Event not found
+    // smart_contracts/ticketing/contract.py:222
+    // event_name, name_exists = self.event_names.maybe(event_id)
+    bytec 8 // 0x656e
+    dig 2
+    concat
+    box_get
+    pop
+    swap
+    // smart_contracts/ticketing/contract.py:223
+    // venue, venue_exists = self.event_venues.maybe(event_id)
+    bytec 9 // 0x6576
+    dig 3
+    concat
+    box_get
+    pop
+    swap
+    // smart_contracts/ticketing/contract.py:224
+    // date, date_exists = self.event_dates.maybe(event_id)
+    bytec 10 // 0x6564
+    dig 4
+    concat
+    box_get
+    pop
+    btoi
+    // smart_contracts/ticketing/contract.py:225
+    // price, price_exists = self.event_prices.maybe(event_id)
+    bytec 5 // 0x6570
+    dig 5
+    concat
+    box_get
+    pop
+    btoi
+    // smart_contracts/ticketing/contract.py:226
+    // total, total_exists = self.event_total.maybe(event_id)
+    bytec 6 // 0x6574
+    dig 6
+    concat
+    box_get
+    pop
+    btoi
+    // smart_contracts/ticketing/contract.py:227
+    // sold, sold_exists = self.event_sold.maybe(event_id)
+    bytec 7 // 0x6573
+    dig 7
+    concat
+    box_get
+    pop
+    btoi
+    // smart_contracts/ticketing/contract.py:228
+    // asset_id, asset_exists = self.event_assets.maybe(event_id)
+    bytec_3 // 0x6561
+    uncover 8
+    concat
+    box_get
+    pop
+    btoi
+    // smart_contracts/ticketing/contract.py:230
+    // return club_owner.bytes, event_name, venue, date, price, total, sold, asset_id
+    uncover 5
+    cover 7
+    retsub
+
+
+// smart_contracts.ticketing.contract.TicketingPlatform.get_club_name(club_address: bytes) -> bytes:
+get_club_name:
+    // smart_contracts/ticketing/contract.py:232-233
+    // @abimethod(readonly=True)
+    // def get_club_name(self, club_address: Bytes) -> Bytes:
+    proto 1 1
+    // smart_contracts/ticketing/contract.py:243-244
+    // # Convert Bytes to Account for BoxMap lookup
+    // club_account = Account(club_address)
+    frame_dig -1
+    len
+    pushint 32 // 32
+    ==
+    assert // Address length is 32 bytes
+    // smart_contracts/ticketing/contract.py:245
+    // club_name, exists = self.club_names.maybe(club_account)
+    bytec_2 // 0x63
+    frame_dig -1
+    concat
+    box_get
+    // smart_contracts/ticketing/contract.py:246
+    // assert exists, "Club not registered"
+    assert // Club not registered
+    // smart_contracts/ticketing/contract.py:247
+    // return club_name
+    retsub
+
+
+// smart_contracts.ticketing.contract.TicketingPlatform.get_total_events() -> uint64:
+get_total_events:
+    // smart_contracts/ticketing/contract.py:257
+    // return self.event_counter
+    intc_1 // 0
+    bytec_1 // "event_counter"
+    app_global_get_ex
+    assert // check self.event_counter exists
+    retsub
+
+
+// smart_contracts.ticketing.contract.TicketingPlatform.is_club_registered(club_address: bytes) -> bytes:
+is_club_registered:
+    // smart_contracts/ticketing/contract.py:259-260
+    // @abimethod(readonly=True)
+    // def is_club_registered(self, club_address: Account) -> Bool:
+    proto 1 1
+    // smart_contracts/ticketing/contract.py:270
+    // club_name_val, exists = self.club_names.maybe(club_address)
+    bytec_2 // 0x63
+    frame_dig -1
+    concat
+    box_get
+    bury 1
+    // smart_contracts/ticketing/contract.py:271
+    // return Bool(exists)
+    pushbytes 0x00
+    intc_1 // 0
+    uncover 2
+    setbit
+    retsub
