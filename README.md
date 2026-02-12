@@ -83,11 +83,17 @@ The **MLSC club** at our university is organizing "Hexpiration 26" - a 24-hour b
 > Add screenshots below in final version:
 
 * ✅ Landing Page
-* ✅ Club Registration Modal
+* <img width="1600" height="761" alt="image" src="https://github.com/user-attachments/assets/43a98e45-2079-4a6c-b709-1dee934992f9" />
+
+* ✅ Club Registration Model
+*   <img width="839" height="806" alt="image" src="https://github.com/user-attachments/assets/85b69eb7-c31f-475a-8763-28091f5685ee" />
+
 * ✅ Event Creation Form
-* ✅ Ticket Purchase Flow
-* ✅ Ticket NFT in Wallet
+* <img width="1600" height="752" alt="image" src="https://github.com/user-attachments/assets/8b5bc0e6-e716-44a0-b56a-775fc1c9963a" />
+
 * ✅ On-Chain Ledger View
+* <img width="1600" height="763" alt="image" src="https://github.com/user-attachments/assets/e75f22fa-747c-4132-9b97-a72f5e956a9d" />
+
 
 ---
 
@@ -161,9 +167,9 @@ For testing purposes, ticket prices have been reduced to **0.001 ALGO**. Events 
 
 ## 📩 Contact & Credit
 
-Built with ❤️ by students from [Your University Name].
-Lead Dev: [Your Name]
-Mail: [your@email.com](mailto:your@email.com)
+Built with ❤️ by students from [Vishwakarma Institute of Technology, Pune].
+Lead Dev: [Prithviraj Jadhav]
+Mail: [prithviw2004@gmail.com](mailto:prithviw2004@gmail.com)
 
 ---
 
